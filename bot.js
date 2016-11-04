@@ -2,108 +2,32 @@ var tracery = require('tracery-grammar');
 
 var rawGrammar = 
 {
-	"origin": [
-		"... take the #ordinal# #direction# after #landmark# ...",
-		"... continue past #landmark#, then turn #direction# ...",
-		"... you should go past #landmark# ...",
-		"... be on the lookout for #landmark# ...",
-		"... cut through to the #direction# ...",
-		"... carry on for #distance# ...",
-		"(if you see #landmark# #too far#)",
-		"... carry on past #landmark# ...",
-		"... go past #landmark# ...",
-		"... then under #bridge# ...",
-		"... there'll be #landmark# to your #direction# ...",
-		"... then past #landmark# ...",
-		"... take the #ordinal# #direction# ...",
-		"... continue for #distance# ...",
-		"... after #distance#, turn #direction# ...",
-		"... then turn #direction# ...",
-		"... turn #direction# here ...",
-		"... #ordinal# #direction# ...",
-		"... #direction# ...",
-		"... veer #direction# #possiblejunction# ...",
-		"... keep going til you see #landmark# ..."
-	],
-	"direction": [
-		"left",
-		"right"
-	],
-	"ordinal": [
-		"first",
-		"second",
-		"third"
-	],
-	"landmark": [
-		"the McDonalds",
-		"a rather nice pub",
-		"the petrol station",
-		"the old church",
-		"a little church",
-		"a small copse",
-		"the roundabout",
-		"a rather pretty little village green",
-		"the motorway",
-		"the canal",
-		"a pub",
-		"the signpost",
-		"a massive oak tree",
-		"a white building",
-		"the town center",
-		"a corner shop",
-		"the Co-op",
-		"the big Tescos",
-		"Morrisons",
-		"a multistorey",
-		"that italian restaurant we went to that one time",
-		"the river",
-		"boats",
-		"the fairground",
-		"the park",
-		"a pizza place"
-	],
-	"distance": [
-		"half a mile",
-		"a few hundred meters",
-		"a few more minutes",
-		"a little bit further",
-		"a few miles",
-		"one and a half miles",
-		"a while",
-		"3 miles",
-		"a few more turnings",
-		"a few blocks",
-		"most of the way down",
-		"about a kilometer",
-		"a mile",
-		"a bit",
-		"- well, it's about 10 minutes on foot",
-		"half a kilometer",
-		"nearly ten miles",
-		"just under four miles"
-	],
-	"bridge": [
-		"the bridge",
-		"the motorway",
-		"a railway line",
-		"the bypass"
-	],
-	"too far": [
-		"you've went too far",
-		"you should double back",
-		"you're nearly there",
-		"turn round",
-		"keep going"
-	],
-	"possiblejunction": [
-		" ",
-		"at the junction",
-		"by the #landmark#",
-		"when you meet the road coming down from #landmark#",
-		" ",
-		"at the roundabout"
-	]
+	"origin": ["#starts# #attributes.a# #places#,\nwith #adjectives.a# #people#,\n#openquestion#",
+	"#starts# #attributes.a# #places#,\nwith #objectives.a# #object#,\n#openquestion#", 
+	"#starts# #attributes.a# #places#,\nwith #writing.a#,\n#text#"],
+
+	"starts": ["And you may find yourself in", "And you may find yourself inside", "And you may find yourself trapped in", "And you may find yourself discovering", "And you may find yourself exploring", "And you may find yourself hiding in", "And you may find yourself teleported to", "And you may find yourself living in"],
+	
+	"attributes": ["beautiful", "hidden", "burning", "mystical", "ancient", "colorful", "tiny", "small", "magical", "overgrown", "destroyed", "lost", "dark", "wet", "cold", "forgotten", "foggy", "misty"],
+
+	"places": ["manor", "castle", "attic", "cellar", "tower", "apartment", "room", "building", "house", "office", "cave", "mine", "temple", "cavern", "ruin", "greenhouse", "monastery", "cabin", "chapel", "library", "church", "cave system", "underground city", "lighthouse", "ship", "underground tunnel", "abbey", "cottage", "underground garden", "battleship"],
+
+	"people":["father", "mother", "parent", "son", "daughter", "child", "husband", "wife", "spouse", "brother", "sister", "sibling", "grandfather", "grandmother", "grandson", "granddaughter", "grandchild", "uncle", "aunt", "nephew", "niece", "cousin", "2nd cousin", "accountant", "actor", "actress", "athlete", "author", "baker", "banker", "barber", "beautician", "broker", "burglar", "butcher", "carpenter", "chauffeur", "chef", "clerk", "coach", "craftsman", "criminal", "crook", "dentist", "doctor", "editor", "engineer", "farmer", "fire fighter", "fisherman", "judge", "lawyer", "magician", "mechanic", "musician", "nurse", "pharmacist", "pilot", "poet", "policeman", "politician", "printer", "professor", "rabbi", "priest", "pastor", "sailor", "salesman", "shoemaker", "soldier", "tailor", "teacher", "veterinarian", "waiter", "waitress", "watchmaker"],
+	
+	"objectives":["damaged", "decaying", "lost", "broken", "destroyed", "shattered", "overgrown", "mossy", "ancient", "old", "weird", "crazy", "crude", "mysterious", "odd", "strange", "eerie", "abnormal", "unnatural", "occult", "cryptic", "miraculous", "glowing", "overgrown", "ancient", "magical", "glowing", "floating", "seemingly weightless"],
+
+	"adjectives":["able", "abnormal", "absent-minded", "above average", "adventurous", "affectionate", "agile", "agreeable", "alert", "amazing", "ambitious", "amiable", "amusing", "analytical", "angelic", "apathetic", "apprehensive", "ardent", "artificial", "artistic", "assertive", "attentive", "average", "awesome", "awful", "balanced", "beautiful", "below average", "beneficent", "blue", "blunt", "boisterous", "brave", "bright", "brilliant", "buff", "callous", "candid", "cantankerous", "capable", "careful", "careless", "caustic", "cautious", "charming", "childish", "childlike", "cheerful", "chic", "churlish", "circumspect", "civil", "clean", "clever", "clumsy", "coherent", "cold", "competent", "composed", "conceited", "condescending", "confident", "confused", "conscientious", "considerate", "content", "cool", "cool-headed", "cooperative", "cordial", "courageous", "cowardly", "crabby", "crafty", "cranky", "crass", "critical", "cruel", "curious", "cynical", "dainty", "decisive", "deep", "deferential", "deft", "delicate", "demonic", "dependent", "delightful", "demure", "depressed", "devoted", "dextrous", "diligent", "direct", "dirty", "disagreeable", "discerning", "discreet", "disruptive", "distant", "distraught", "distrustful", "dowdy", "dramatic", "dreary", "drowsy", "drugged", "drunk", "dull", "dutiful", "eager", "earnest", "easy-going", "efficient", "egotistical", "elfin", "emotional", "energetic", "enterprising", "enthusiastic", "evasive", "even-tempered", "exacting", "excellent", "excitable", "experienced", "fabulous", "fastidious", "ferocious", "fervent", "fiery", "flabby", "flaky", "flashy", "frank", "friendly", "funny", "fussy", "generous", "gentle", "gloomy", "glutinous", "good", "grave", "great", "groggy", "grouchy", "guarded", "hateful", "hearty", "helpful", "hesitant", "hot-headed", "hypercritical", "hysterical", "idiotic", "idle", "illogical", "imaginative", "immature", "immodest", "impatient", "imperturbable", "impetuous", "impractical", "impressionable", "impressive", "impulsive", "inactive", "incisive", "incompetent", "inconsiderate", "inconsistent", "independent", "indiscreet", "indolent", "indefatigable", "industrious", "inexperienced", "insensitive", "inspiring", "intelligent", "interesting", "intolerant", "inventive", "irascible", "irritable", "irritating", "jocular", "jovial", "joyous", "judgmental", "keen", "kind", "lame", "lazy", "lean", "leery", "lethargic", "level-headed", "listless", "lithe", "lively", "local", "logical", "long-winded", "lovable", "love-lorn", "lovely", "maternal", "mature", "mean", "meddlesome", "mercurial", "methodical", "meticulous", "mild", "miserable", "modest", "moronic", "morose", "motivated", "musical", "naive", "nasty", "natural", "naughty", "negative", "nervous", "noisy", "normal", "nosy", "numb", "obliging", "obnoxious", "old-fashioned", "one-sided", "orderly", "ostentatious", "outgoing", "outspoken", "passionate", "passive", "paternal", "paternalistic", "patient", "peaceful", "peevish", "pensive", "persevering", "persnickety", "petulant", "picky", "plain", "plain-speaking", "playful", "pleasant", "plucky", "polite", "popular", "positive", "powerful", "practical", "prejudiced", "pretty", "proficient", "proud", "provocative", "prudent", "punctual", "quarrelsome", "querulous", "quick", "quick-tempered", "quiet", "realistic", "reassuring", "reclusive", "reliable", "reluctant", "resentful", "reserved", "resigned", "resourceful", "respected", "respectful", "responsible", "restless", "revered", "ridiculous", "sad", "sassy", "saucy", "sedate", "self-assured", "selfish", "sensible", "sensitive", "sentimental", "serene", "serious", "sharp", "short-tempered", "shrewd", "shy", "silly", "sincere", "sleepy", "slight", "sloppy", "slothful", "slovenly", "slow", "smart", "snazzy", "sneering", "snobby", "somber", "sober", "sophisticated", "soulful", "soulless", "sour", "spirited", "spiteful", "stable", "staid", "steady", "stern", "stoic", "striking", "strong", "stupid", "sturdy", "subtle", "sullen", "sulky", "supercilious", "superficial", "surly", "suspicious", "sweet", "tactful", "tactless", "talented", "testy", "thinking", "thoughtful", "thoughtless", "timid", "tired", "tolerant", "touchy", "tranquil", "ugly", "unaffected", "unbalanced", "uncertain", "uncooperative", "undependable", "unemotional", "unfriendly", "unguarded", "unhelpful", "unimaginative", "unmotivated", "unpleasant", "unpopular", "unreliable", "unsophisticated", "unstable", "unsure", "unthinking", "unwilling", "venal", "versatile", "vigilant", "warm", "warmhearted", "wary", "watchful", "weak", "well-behaved", "well-developed", "well-meaning", "well-respected", "well-rounded", "willing", "wonderful", "volcanic", "vulnerable", "zealous"],
+
+	"object":["doll", "crystal", "glass", "skull", "clock", "chain", "book", "toy", "instrument", "lamp", "machine", "bottle", "shoe", "painting", "statue", "paint brush", "mannequin", "cage", "coffin", "weapon", "television", "telephone", "lamp", "painting", "drawing", "note", "writing", "diagram", "schematic", "wallpaper", "mirror", "symbol", "pattern", "fresco", "mosaic", "paint", "plant", "tree", "leaf", "crystal", "clock", "fairy", "book", "firefly", "acorn", "flower", "mirror", "light", "skull",  "fish", "hat", "documents"],
+	
+	"writing":["note", "piece of paper", "diary entry", "tome", "book", "journal", "poster", "slate", "crystal ball"],
+	"text":["that says, \"How did I get here?\""],
+	
+	"openquestion":["And you may ask yourself how did I get here?"]
 }
+
+
+
 
 var processedGrammar = tracery.createGrammar(rawGrammar);
 
